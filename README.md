@@ -2,8 +2,8 @@
 
 skills :
 
-Materail(TextField, radioGroup)
+Materail Design(TextField, radioGroup)
 
-extemsion Method(EditText listener with completion )
+extension Method(EditText listener with completion )
 
 enum class
