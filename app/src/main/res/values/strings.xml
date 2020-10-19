@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UnsplashAppExam</string>
+    <string name="login_helper_text">검색어를 입력해주세요</string>
+    <string name="searchText">검색</string>
+</resources>
