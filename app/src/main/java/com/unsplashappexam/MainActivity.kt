@@ -91,6 +91,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "onCreate: 검색 버튼 클릭 currentSearchType : $currentSearchType")
 
 
+            Log.d(TAG, "onCreate: 검색 : ${search_term_edit_text.text}")
             //검색 api 호출
             RetrofitManager.instance.searchPhotos(
                 searchTerm = search_term_edit_text.toString(),
