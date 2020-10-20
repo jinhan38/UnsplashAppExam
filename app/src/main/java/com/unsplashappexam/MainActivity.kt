@@ -9,9 +9,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.unsplashappexam.retrofit.RetrofitManager
 import com.unsplashappexam.utils.Constants.TAG
+import com.unsplashappexam.utils.RESPONSE_STATE
 import com.unsplashappexam.utils.SEARCH_TYPE
 import com.unsplashappexam.utils.onMyTextChanged
+import com.unsplashappexam.utils.toastMethod
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_button_search.*
 
@@ -58,7 +61,9 @@ class MainActivity : AppCompatActivity() {
 
 
         search_term_edit_text.onMyTextChanged {
+
             if (it != null) {
+
                 if (it.isNotEmpty()) {
                     Log.d(TAG, "onCreate: $it")
                     frame_search_button.visibility = View.VISIBLE
@@ -84,8 +89,26 @@ class MainActivity : AppCompatActivity() {
 
         search_button.setOnClickListener {
             Log.d(TAG, "onCreate: 검색 버튼 클릭 currentSearchType : $currentSearchType")
-            handleSearchButtonUI(it as Button, progressBar, true)
 
+
+            //검색 api 호출
+            RetrofitManager.instance.searchPhotos(
+                searchTerm = search_term_edit_text.toString(),
+                completion = { responseState, response ->
+                    when (responseState) {
+                        RESPONSE_STATE.OKAY -> {
+                            toastMethod(this, "api 호출 성공 : $response")
+                            Log.d(TAG, "onCreate: $response")
+                            
+                        }
+                        RESPONSE_STATE.FAIL -> {
+                            toastMethod(this, "api 호출 에러 : $response")
+                            Log.d(TAG, "onCreate: $response")
+                        }
+                    }
+
+                })
+            handleSearchButtonUI(it as Button, progressBar, true)
         }
     }
 
