@@ -1,6 +1,7 @@
 package com.unsplashappexam
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -11,7 +12,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.unsplashappexam.retrofit.RetrofitManager
 import com.unsplashappexam.utils.Constants.TAG
-import com.unsplashappexam.utils.RESPONSE_STATE
+import com.unsplashappexam.utils.RESPONSE_STATUS
 import com.unsplashappexam.utils.SEARCH_TYPE
 import com.unsplashappexam.utils.onMyTextChanged
 import com.unsplashappexam.utils.toastMethod
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         Log.d(TAG, "onCreate: ")
 
@@ -90,26 +92,44 @@ class MainActivity : AppCompatActivity() {
         search_button.setOnClickListener {
             Log.d(TAG, "onCreate: 검색 버튼 클릭 currentSearchType : $currentSearchType")
 
+            handleSearchButtonUI(it as Button, progressBar, true)
 
-            Log.d(TAG, "onCreate: 검색 : ${search_term_edit_text.text}")
+            Log.d(TAG, "onCreate: 검색 : ${search_term_edit_text.text.toString()}")
+
             //검색 api 호출
+            val userSearchInput = search_term_edit_text.text.toString()
             RetrofitManager.instance.searchPhotos(
-                searchTerm = search_term_edit_text.toString(),
+                searchTerm = userSearchInput,
                 completion = { responseState, response ->
                     when (responseState) {
-                        RESPONSE_STATE.OKAY -> {
-                            toastMethod(this, "api 호출 성공 : $response")
-                            Log.d(TAG, "onCreate: $response")
-                            
+                        RESPONSE_STATUS.OKAY -> {
+                            Log.d(TAG, "onCreate: ${response?.size}")
+
+                            val intent = Intent(this, PhotoCollectionActivity::class.java)
+                            //번들로 보낼 때 데이터클래스가 Serializable(직렬)가 되어 있어야 함
+                            val bundle = Bundle()
+                            bundle.putSerializable("photo_array_list", response)
+                            intent.putExtra("array_bundle", bundle)
+                            intent.putExtra("search_term", userSearchInput)
+                            startActivity(intent)
+
+
                         }
-                        RESPONSE_STATE.FAIL -> {
+
+                        RESPONSE_STATUS.NO_CONTENT ->{
+                            toastMethod(this, "검색 결과가 없습니다.")
+                        }
+                        
+                        RESPONSE_STATUS.FAIL -> {
                             toastMethod(this, "api 호출 에러 : $response")
                             Log.d(TAG, "onCreate: $response")
                         }
                     }
+                    handleSearchButtonUI(it as Button, progressBar, false)
 
                 })
-            handleSearchButtonUI(it as Button, progressBar, true)
+
+
         }
     }
 

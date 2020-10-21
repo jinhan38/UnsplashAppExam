@@ -14,9 +14,11 @@ enum class SEARCH_TYPE {
     USER
 }
 
-enum class RESPONSE_STATE{
+enum class RESPONSE_STATUS{
     OKAY,
-    FAIL
+    FAIL,
+    NO_CONTENT
+
 }
 
 object API {

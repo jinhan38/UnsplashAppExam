@@ -4,13 +4,33 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
+
+<!--        버튼 클릭, ripple 같은 것들에 적용됨-->
+<!--        <item name="colorControlHighlight">@color/white</item>-->
+
+<!--        이걸 바꾸면 앱바의 아이콘들의 색깔이 바뀐다.-->
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
+<!-- colorSecondary를 바꾸니까 appbar의 searchView에서 커서 색깔이 바뀜-->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="myRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+<!--colorControlActivated는 선택된거
+      colorControlHighlight는 클릭할 때 물결 퍼지는거  -->
+        <item name="colorControlNormal">@color/light_gray</item>
+        <item name="colorControlActivated">@color/purple_700</item>
+        <item name="colorControlHighlight">#EA598A</item>
+    </style>
+
+    <style name="MySwitchButton">
+        <item name="colorSwitchThumbNormal">@color/light_gray</item>
+        <item name="colorControlActivated">@color/purple_700</item>
+        <item name="android:colorForeground">@color/light_gray</item>
     </style>
 </resources>

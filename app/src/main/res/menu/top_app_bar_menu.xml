@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_menu"
+        android:contentDescription="검색"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="검색"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+    <!--    actionViewClass 설정과 ,showAsAction에서 collapseActionView를 넣어주면
+    searchView를 만들 수 있다.-->
+
+    <item
+        android:id="@+id/more_menu"
+        android:contentDescription="더보기"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title="더보기"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

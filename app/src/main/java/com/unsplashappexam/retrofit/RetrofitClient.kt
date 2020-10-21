@@ -1,13 +1,10 @@
 package com.unsplashappexam.retrofit
 
-import android.os.Looper
 import android.util.Log
-import com.unsplashappexam.App
 import com.unsplashappexam.utils.API
 import com.unsplashappexam.utils.Constants.TAG
 import com.unsplashappexam.utils.isJsonArray
 import com.unsplashappexam.utils.isJsonObject
-import com.unsplashappexam.utils.toastMethod
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,7 +12,6 @@ import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import java.util.logging.Handler
 
 //코틀린에서 object는 싱글톤이다. 메모리를 하나만 쓴다
 
@@ -75,11 +71,12 @@ object RetrofitClient {
                 .build()
 
 
-
+            //에러 발생함
 //            val response = chain.proceed(finalRequest)
 //            if (response.code != 200){
 //                toastMethod(App.instance,"${response.code} 에러입니다")
 //            }
+
             chain.proceed(finalRequest)
 
         })
