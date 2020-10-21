@@ -49,7 +49,7 @@ class PhotoCollectionActivity : AppCompatActivity(),
     private var photoList = ArrayList<Photo>()
 
     //검색기록 배열
-    private var searchHistoryList = ArrayList<SearchData>()
+    private var searchHistoryList = ArrayList<SearchData>()      
 
 
     //서치뷰
